@@ -1,0 +1,82 @@
+﻿@model SoccerStats.Models.T_Joueur
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Joueur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomJoueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomJoueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prenomJoueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenomJoueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ageJoueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ageJoueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.poidsJoueurKg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.poidsJoueurKg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tailleJoueurCm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tailleJoueurCm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nationaliteJoueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nationaliteJoueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Club.nomClub)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Club.nomClub)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Stats.idStats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Stats.idStats)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idJoueur }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BD_SoccerStatsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="T_Championnat">
+          <Key>
+            <PropertyRef Name="idChampionnat" />
+          </Key>
+          <Property Name="idChampionnat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelleChamp" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_Club">
+          <Key>
+            <PropertyRef Name="idClub" />
+          </Key>
+          <Property Name="idClub" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idChampionnat" Type="int" Nullable="false" />
+          <Property Name="nomClub" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_Competition">
+          <Key>
+            <PropertyRef Name="idCompetition" />
+          </Key>
+          <Property Name="idCompetition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelleCompetition" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_Entraineur">
+          <Key>
+            <PropertyRef Name="idEntraineur" />
+          </Key>
+          <Property Name="idEntraineur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idClub" Type="int" Nullable="false" />
+          <Property Name="nomEntraineur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nationaliteEntraineur" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_Joueur">
+          <Key>
+            <PropertyRef Name="idJoueur" />
+          </Key>
+          <Property Name="idJoueur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStats" Type="int" Nullable="false" />
+          <Property Name="idClub" Type="int" Nullable="false" />
+          <Property Name="nomJoueur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenomJoueur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ageJoueur" Type="int" Nullable="false" />
+          <Property Name="poidsJoueurKg" Type="int" Nullable="false" />
+          <Property Name="tailleJoueurCm" Type="int" Nullable="false" />
+          <Property Name="nationaliteJoueur" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T_Resultat">
+          <Key>
+            <PropertyRef Name="idResultat" />
+          </Key>
+          <Property Name="idResultat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idClub" Type="int" Nullable="false" />
+          <Property Name="idCompetition" Type="int" Nullable="false" />
+          <Property Name="clubDomicile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clubExterieur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scoreDomicile" Type="int" Nullable="false" />
+          <Property Name="scoreExterieur" Type="int" Nullable="false" />
+          <Property Name="victoireDomicile" Type="bit" Nullable="false" />
+          <Property Name="victoireExterieur" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_Stats">
+          <Key>
+            <PropertyRef Name="idStats" />
+          </Key>
+          <Property Name="idStats" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matchJoues" Type="int" Nullable="false" />
+          <Property Name="butMarques" Type="int" Nullable="false" />
+          <Property Name="passesDecisives" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_T_Club_Championnat">
+          <End Role="T_Championnat" Type="Self.T_Championnat" Multiplicity="1" />
+          <End Role="T_Club" Type="Self.T_Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Championnat">
+              <PropertyRef Name="idChampionnat" />
+            </Principal>
+            <Dependent Role="T_Club">
+              <PropertyRef Name="idChampionnat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Entraineur_Club">
+          <End Role="T_Club" Type="Self.T_Club" Multiplicity="1" />
+          <End Role="T_Entraineur" Type="Self.T_Entraineur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Club">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="T_Entraineur">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Joueur_Club">
+          <End Role="T_Club" Type="Self.T_Club" Multiplicity="1" />
+          <End Role="T_Joueur" Type="Self.T_Joueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Club">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="T_Joueur">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Joueur_Stats">
+          <End Role="T_Stats" Type="Self.T_Stats" Multiplicity="1" />
+          <End Role="T_Joueur" Type="Self.T_Joueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Stats">
+              <PropertyRef Name="idStats" />
+            </Principal>
+            <Dependent Role="T_Joueur">
+              <PropertyRef Name="idStats" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Resultat_Club">
+          <End Role="T_Club" Type="Self.T_Club" Multiplicity="1" />
+          <End Role="T_Resultat" Type="Self.T_Resultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Club">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="T_Resultat">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Resultat_Compet">
+          <End Role="T_Competition" Type="Self.T_Competition" Multiplicity="1" />
+          <End Role="T_Resultat" Type="Self.T_Resultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Competition">
+              <PropertyRef Name="idCompetition" />
+            </Principal>
+            <Dependent Role="T_Resultat">
+              <PropertyRef Name="idCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_SoccerStatsModelStoreContainer">
+          <EntitySet Name="T_Championnat" EntityType="Self.T_Championnat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Club" EntityType="Self.T_Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Competition" EntityType="Self.T_Competition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Entraineur" EntityType="Self.T_Entraineur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Joueur" EntityType="Self.T_Joueur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Resultat" EntityType="Self.T_Resultat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Stats" EntityType="Self.T_Stats" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_T_Club_Championnat" Association="Self.FK_T_Club_Championnat">
+            <End Role="T_Championnat" EntitySet="T_Championnat" />
+            <End Role="T_Club" EntitySet="T_Club" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Entraineur_Club" Association="Self.FK_T_Entraineur_Club">
+            <End Role="T_Club" EntitySet="T_Club" />
+            <End Role="T_Entraineur" EntitySet="T_Entraineur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Joueur_Club" Association="Self.FK_T_Joueur_Club">
+            <End Role="T_Club" EntitySet="T_Club" />
+            <End Role="T_Joueur" EntitySet="T_Joueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Joueur_Stats" Association="Self.FK_T_Joueur_Stats">
+            <End Role="T_Stats" EntitySet="T_Stats" />
+            <End Role="T_Joueur" EntitySet="T_Joueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Resultat_Club" Association="Self.FK_T_Resultat_Club">
+            <End Role="T_Club" EntitySet="T_Club" />
+            <End Role="T_Resultat" EntitySet="T_Resultat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Resultat_Compet" Association="Self.FK_T_Resultat_Compet">
+            <End Role="T_Competition" EntitySet="T_Competition" />
+            <End Role="T_Resultat" EntitySet="T_Resultat" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_SoccerStatsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BD_SoccerStatsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_Championnat" EntityType="BD_SoccerStatsModel.T_Championnat" />
+          <EntitySet Name="T_Club" EntityType="BD_SoccerStatsModel.T_Club" />
+          <EntitySet Name="T_Competition" EntityType="BD_SoccerStatsModel.T_Competition" />
+          <EntitySet Name="T_Entraineur" EntityType="BD_SoccerStatsModel.T_Entraineur" />
+          <EntitySet Name="T_Joueur" EntityType="BD_SoccerStatsModel.T_Joueur" />
+          <EntitySet Name="T_Resultat" EntityType="BD_SoccerStatsModel.T_Resultat" />
+          <EntitySet Name="T_Stats" EntityType="BD_SoccerStatsModel.T_Stats" />
+          <AssociationSet Name="FK_T_Club_Championnat" Association="BD_SoccerStatsModel.FK_T_Club_Championnat">
+            <End Role="T_Championnat" EntitySet="T_Championnat" />
+            <End Role="T_Club" EntitySet="T_Club" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Entraineur_Club" Association="BD_SoccerStatsModel.FK_T_Entraineur_Club">
+            <End Role="T_Club" EntitySet="T_Club" />
+            <End Role="T_Entraineur" EntitySet="T_Entraineur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Joueur_Club" Association="BD_SoccerStatsModel.FK_T_Joueur_Club">
+            <End Role="T_Club" EntitySet="T_Club" />
+            <End Role="T_Joueur" EntitySet="T_Joueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Resultat_Club" Association="BD_SoccerStatsModel.FK_T_Resultat_Club">
+            <End Role="T_Club" EntitySet="T_Club" />
+            <End Role="T_Resultat" EntitySet="T_Resultat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Resultat_Compet" Association="BD_SoccerStatsModel.FK_T_Resultat_Compet">
+            <End Role="T_Competition" EntitySet="T_Competition" />
+            <End Role="T_Resultat" EntitySet="T_Resultat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Joueur_Stats" Association="BD_SoccerStatsModel.FK_T_Joueur_Stats">
+            <End Role="T_Stats" EntitySet="T_Stats" />
+            <End Role="T_Joueur" EntitySet="T_Joueur" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="T_Championnat">
+          <Key>
+            <PropertyRef Name="idChampionnat" />
+          </Key>
+          <Property Name="idChampionnat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelleChamp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_Club" Relationship="BD_SoccerStatsModel.FK_T_Club_Championnat" FromRole="T_Championnat" ToRole="T_Club" />
+        </EntityType>
+        <EntityType Name="T_Club">
+          <Key>
+            <PropertyRef Name="idClub" />
+          </Key>
+          <Property Name="idClub" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idChampionnat" Type="Int32" Nullable="false" />
+          <Property Name="nomClub" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_Championnat" Relationship="BD_SoccerStatsModel.FK_T_Club_Championnat" FromRole="T_Club" ToRole="T_Championnat" />
+          <NavigationProperty Name="T_Entraineur" Relationship="BD_SoccerStatsModel.FK_T_Entraineur_Club" FromRole="T_Club" ToRole="T_Entraineur" />
+          <NavigationProperty Name="T_Joueur" Relationship="BD_SoccerStatsModel.FK_T_Joueur_Club" FromRole="T_Club" ToRole="T_Joueur" />
+          <NavigationProperty Name="T_Resultat" Relationship="BD_SoccerStatsModel.FK_T_Resultat_Club" FromRole="T_Club" ToRole="T_Resultat" />
+        </EntityType>
+        <EntityType Name="T_Competition">
+          <Key>
+            <PropertyRef Name="idCompetition" />
+          </Key>
+          <Property Name="idCompetition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelleCompetition" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_Resultat" Relationship="BD_SoccerStatsModel.FK_T_Resultat_Compet" FromRole="T_Competition" ToRole="T_Resultat" />
+        </EntityType>
+        <EntityType Name="T_Entraineur">
+          <Key>
+            <PropertyRef Name="idEntraineur" />
+          </Key>
+          <Property Name="idEntraineur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idClub" Type="Int32" Nullable="false" />
+          <Property Name="nomEntraineur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nationaliteEntraineur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_Club" Relationship="BD_SoccerStatsModel.FK_T_Entraineur_Club" FromRole="T_Entraineur" ToRole="T_Club" />
+        </EntityType>
+        <EntityType Name="T_Joueur">
+          <Key>
+            <PropertyRef Name="idJoueur" />
+          </Key>
+          <Property Name="idJoueur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStats" Type="Int32" Nullable="false" />
+          <Property Name="idClub" Type="Int32" Nullable="false" />
+          <Property Name="nomJoueur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prenomJoueur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ageJoueur" Type="Int32" Nullable="false" />
+          <Property Name="poidsJoueurKg" Type="Int32" Nullable="false" />
+          <Property Name="tailleJoueurCm" Type="Int32" Nullable="false" />
+          <Property Name="nationaliteJoueur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_Club" Relationship="BD_SoccerStatsModel.FK_T_Joueur_Club" FromRole="T_Joueur" ToRole="T_Club" />
+          <NavigationProperty Name="T_Stats" Relationship="BD_SoccerStatsModel.FK_T_Joueur_Stats" FromRole="T_Joueur" ToRole="T_Stats" />
+        </EntityType>
+        <EntityType Name="T_Resultat">
+          <Key>
+            <PropertyRef Name="idResultat" />
+          </Key>
+          <Property Name="idResultat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idClub" Type="Int32" Nullable="false" />
+          <Property Name="idCompetition" Type="Int32" Nullable="false" />
+          <Property Name="clubDomicile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clubExterieur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="scoreDomicile" Type="Int32" Nullable="false" />
+          <Property Name="scoreExterieur" Type="Int32" Nullable="false" />
+          <Property Name="victoireDomicile" Type="Boolean" Nullable="false" />
+          <Property Name="victoireExterieur" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="T_Club" Relationship="BD_SoccerStatsModel.FK_T_Resultat_Club" FromRole="T_Resultat" ToRole="T_Club" />
+          <NavigationProperty Name="T_Competition" Relationship="BD_SoccerStatsModel.FK_T_Resultat_Compet" FromRole="T_Resultat" ToRole="T_Competition" />
+        </EntityType>
+        <EntityType Name="T_Stats">
+          <Key>
+            <PropertyRef Name="idStats" />
+          </Key>
+          <Property Name="idStats" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matchJoues" Type="Int32" Nullable="false" />
+          <Property Name="butMarques" Type="Int32" Nullable="false" />
+          <Property Name="passesDecisives" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_Joueur" Relationship="BD_SoccerStatsModel.FK_T_Joueur_Stats" FromRole="T_Stats" ToRole="T_Joueur" />
+        </EntityType>
+        <Association Name="FK_T_Club_Championnat">
+          <End Type="BD_SoccerStatsModel.T_Championnat" Role="T_Championnat" Multiplicity="1" />
+          <End Type="BD_SoccerStatsModel.T_Club" Role="T_Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Championnat">
+              <PropertyRef Name="idChampionnat" />
+            </Principal>
+            <Dependent Role="T_Club">
+              <PropertyRef Name="idChampionnat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Entraineur_Club">
+          <End Type="BD_SoccerStatsModel.T_Club" Role="T_Club" Multiplicity="1" />
+          <End Type="BD_SoccerStatsModel.T_Entraineur" Role="T_Entraineur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Club">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="T_Entraineur">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Joueur_Club">
+          <End Type="BD_SoccerStatsModel.T_Club" Role="T_Club" Multiplicity="1" />
+          <End Type="BD_SoccerStatsModel.T_Joueur" Role="T_Joueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Club">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="T_Joueur">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Resultat_Club">
+          <End Type="BD_SoccerStatsModel.T_Club" Role="T_Club" Multiplicity="1" />
+          <End Type="BD_SoccerStatsModel.T_Resultat" Role="T_Resultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Club">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="T_Resultat">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Resultat_Compet">
+          <End Type="BD_SoccerStatsModel.T_Competition" Role="T_Competition" Multiplicity="1" />
+          <End Type="BD_SoccerStatsModel.T_Resultat" Role="T_Resultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Competition">
+              <PropertyRef Name="idCompetition" />
+            </Principal>
+            <Dependent Role="T_Resultat">
+              <PropertyRef Name="idCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Joueur_Stats">
+          <End Type="BD_SoccerStatsModel.T_Stats" Role="T_Stats" Multiplicity="1" />
+          <End Type="BD_SoccerStatsModel.T_Joueur" Role="T_Joueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Stats">
+              <PropertyRef Name="idStats" />
+            </Principal>
+            <Dependent Role="T_Joueur">
+              <PropertyRef Name="idStats" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_SoccerStatsModelStoreContainer" CdmEntityContainer="BD_SoccerStatsEntities">
+          <EntitySetMapping Name="T_Championnat">
+            <EntityTypeMapping TypeName="BD_SoccerStatsModel.T_Championnat">
+              <MappingFragment StoreEntitySet="T_Championnat">
+                <ScalarProperty Name="libelleChamp" ColumnName="libelleChamp" />
+                <ScalarProperty Name="idChampionnat" ColumnName="idChampionnat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Club">
+            <EntityTypeMapping TypeName="BD_SoccerStatsModel.T_Club">
+              <MappingFragment StoreEntitySet="T_Club">
+                <ScalarProperty Name="nomClub" ColumnName="nomClub" />
+                <ScalarProperty Name="idChampionnat" ColumnName="idChampionnat" />
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Competition">
+            <EntityTypeMapping TypeName="BD_SoccerStatsModel.T_Competition">
+              <MappingFragment StoreEntitySet="T_Competition">
+                <ScalarProperty Name="libelleCompetition" ColumnName="libelleCompetition" />
+                <ScalarProperty Name="idCompetition" ColumnName="idCompetition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Entraineur">
+            <EntityTypeMapping TypeName="BD_SoccerStatsModel.T_Entraineur">
+              <MappingFragment StoreEntitySet="T_Entraineur">
+                <ScalarProperty Name="nationaliteEntraineur" ColumnName="nationaliteEntraineur" />
+                <ScalarProperty Name="nomEntraineur" ColumnName="nomEntraineur" />
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+                <ScalarProperty Name="idEntraineur" ColumnName="idEntraineur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Joueur">
+            <EntityTypeMapping TypeName="BD_SoccerStatsModel.T_Joueur">
+              <MappingFragment StoreEntitySet="T_Joueur">
+                <ScalarProperty Name="nationaliteJoueur" ColumnName="nationaliteJoueur" />
+                <ScalarProperty Name="tailleJoueurCm" ColumnName="tailleJoueurCm" />
+                <ScalarProperty Name="poidsJoueurKg" ColumnName="poidsJoueurKg" />
+                <ScalarProperty Name="ageJoueur" ColumnName="ageJoueur" />
+                <ScalarProperty Name="prenomJoueur" ColumnName="prenomJoueur" />
+                <ScalarProperty Name="nomJoueur" ColumnName="nomJoueur" />
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+                <ScalarProperty Name="idStats" ColumnName="idStats" />
+                <ScalarProperty Name="idJoueur" ColumnName="idJoueur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Resultat">
+            <EntityTypeMapping TypeName="BD_SoccerStatsModel.T_Resultat">
+              <MappingFragment StoreEntitySet="T_Resultat">
+                <ScalarProperty Name="victoireExterieur" ColumnName="victoireExterieur" />
+                <ScalarProperty Name="victoireDomicile" ColumnName="victoireDomicile" />
+                <ScalarProperty Name="scoreExterieur" ColumnName="scoreExterieur" />
+                <ScalarProperty Name="scoreDomicile" ColumnName="scoreDomicile" />
+                <ScalarProperty Name="clubExterieur" ColumnName="clubExterieur" />
+                <ScalarProperty Name="clubDomicile" ColumnName="clubDomicile" />
+                <ScalarProperty Name="idCompetition" ColumnName="idCompetition" />
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+                <ScalarProperty Name="idResultat" ColumnName="idResultat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Stats">
+            <EntityTypeMapping TypeName="BD_SoccerStatsModel.T_Stats">
+              <MappingFragment StoreEntitySet="T_Stats">
+                <ScalarProperty Name="passesDecisives" ColumnName="passesDecisives" />
+                <ScalarProperty Name="butMarques" ColumnName="butMarques" />
+                <ScalarProperty Name="matchJoues" ColumnName="matchJoues" />
+                <ScalarProperty Name="idStats" ColumnName="idStats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,26 @@
+﻿@model SoccerStats.Models.T_Competition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Competition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.libelleCompetition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.libelleCompetition)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCompetition }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

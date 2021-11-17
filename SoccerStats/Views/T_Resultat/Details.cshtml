@@ -1,0 +1,82 @@
+﻿@model SoccerStats.Models.T_Resultat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Resultat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.clubDomicile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clubDomicile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.clubExterieur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clubExterieur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scoreDomicile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scoreDomicile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scoreExterieur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scoreExterieur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.victoireDomicile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.victoireDomicile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.victoireExterieur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.victoireExterieur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Club.nomClub)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Club.nomClub)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Competition.libelleCompetition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Competition.libelleCompetition)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idResultat }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

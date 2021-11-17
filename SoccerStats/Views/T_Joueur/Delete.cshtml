@@ -1,0 +1,88 @@
+﻿@model SoccerStats.Models.T_Joueur
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>T_Joueur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomJoueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomJoueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prenomJoueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenomJoueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ageJoueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ageJoueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.poidsJoueurKg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.poidsJoueurKg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tailleJoueurCm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tailleJoueurCm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nationaliteJoueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nationaliteJoueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Club.nomClub)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Club.nomClub)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Stats.idStats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Stats.idStats)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

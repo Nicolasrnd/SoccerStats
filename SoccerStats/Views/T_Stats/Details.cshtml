@@ -1,0 +1,42 @@
+﻿@model SoccerStats.Models.T_Stats
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Stats</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.matchJoues)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.matchJoues)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.butMarques)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.butMarques)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passesDecisives)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passesDecisives)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idStats }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f780d7d494374389943b1f606f5605af" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="BD_SoccerStatsModel.T_Championnat" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="BD_SoccerStatsModel.T_Club" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="BD_SoccerStatsModel.T_Competition" Width="1.5" PointX="6" PointY="1.375" />
+        <EntityTypeShape EntityType="BD_SoccerStatsModel.T_Entraineur" Width="1.5" PointX="5.25" PointY="13" />
+        <EntityTypeShape EntityType="BD_SoccerStatsModel.T_Joueur" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="BD_SoccerStatsModel.T_Resultat" Width="1.5" PointX="8.25" PointY="4.625" />
+        <EntityTypeShape EntityType="BD_SoccerStatsModel.T_Stats" Width="1.5" PointX="3" PointY="2.25" />
+        <AssociationConnector Association="BD_SoccerStatsModel.FK_T_Club_Championnat" />
+        <AssociationConnector Association="BD_SoccerStatsModel.FK_T_Entraineur_Club" />
+        <AssociationConnector Association="BD_SoccerStatsModel.FK_T_Joueur_Club" />
+        <AssociationConnector Association="BD_SoccerStatsModel.FK_T_Resultat_Club" />
+        <AssociationConnector Association="BD_SoccerStatsModel.FK_T_Resultat_Compet" />
+        <AssociationConnector Association="BD_SoccerStatsModel.FK_T_Joueur_Stats" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,26 @@
+﻿@model SoccerStats.Models.T_Championnat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Championnat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.libelleChamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.libelleChamp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idChampionnat }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

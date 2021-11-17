@@ -1,0 +1,42 @@
+﻿@model SoccerStats.Models.T_Entraineur
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Entraineur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomEntraineur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomEntraineur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nationaliteEntraineur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nationaliteEntraineur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Club.nomClub)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Club.nomClub)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idEntraineur }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

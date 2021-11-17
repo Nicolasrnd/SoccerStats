@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SoccerStats.Models.T_Entraineur>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nomEntraineur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nationaliteEntraineur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_Club.nomClub)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomEntraineur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nationaliteEntraineur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_Club.nomClub)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idEntraineur }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idEntraineur }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idEntraineur })
+        </td>
+    </tr>
+}
+
+</table>

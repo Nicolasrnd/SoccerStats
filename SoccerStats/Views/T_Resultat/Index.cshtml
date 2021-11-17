@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SoccerStats.Models.T_Resultat>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.clubDomicile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.clubExterieur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.scoreDomicile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.scoreExterieur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.victoireDomicile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.victoireExterieur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_Club.nomClub)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_Competition.libelleCompetition)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.clubDomicile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.clubExterieur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.scoreDomicile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.scoreExterieur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.victoireDomicile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.victoireExterieur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_Club.nomClub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_Competition.libelleCompetition)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idResultat }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idResultat }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idResultat })
+        </td>
+    </tr>
+}
+
+</table>
